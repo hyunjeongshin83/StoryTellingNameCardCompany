@@ -1,0 +1,29 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Gowun+Dodum&family=Nanum+Myeongjo:wght@400;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  --font-serif: "Nanum Myeongjo", "Batang", serif;
+  --font-dotum: "Gowun Dodum", "Dotum", "돋움", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Custom Palette */
+  --color-mint: #00d2b4;
+  --color-mint-bright: #00e8c8;
+  --color-mint-soft: rgba(0, 210, 180, 0.08);
+  --color-mint-border: rgba(0, 210, 180, 0.15);
+  
+  --color-dark-bg: #0a0f1a;
+  --color-dark-bg-secondary: #0f1525;
+  --color-dark-bg-tertiary: #141c2e;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-dark-bg);
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
