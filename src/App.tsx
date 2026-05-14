@@ -4,12 +4,15 @@
  */
 
 import { motion } from 'motion/react';
-import { ArrowRight, CheckCircle2, ChevronRight, Layout, Palette, Type, CreditCard, ShoppingBag, Package, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ChevronRight, Layout, Palette, Type, CreditCard, ShoppingBag, Package, Sparkles, Mail, Layers, FileText, ShieldCheck, Video } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import Logo from './components/Logo';
 import BusinessCard from './components/BusinessCard';
 import EmailSignatureGuide from './components/EmailSignatureGuide';
 import BrochureCreator from './components/BrochureCreator';
+import FolderCardConcept from './components/FolderCardConcept';
+import DigitalAuthCard from './components/DigitalAuthCard';
+import IdeaSubmission from './components/IdeaSubmission';
 import { CardTheme } from './types';
 
 export default function App() {
@@ -27,6 +30,7 @@ export default function App() {
     { id: 'light', name: 'Clean Light', color: 'bg-white' },
     { id: 'clean-mint', name: 'Mint Power', color: 'bg-mint' },
   ];
+
   return (
     <div className="min-h-screen bg-dark-bg text-white font-sans selection:bg-mint/30 selection:text-mint-bright" id="app-root">
       {/* Navigation */}
@@ -35,26 +39,52 @@ export default function App() {
           <div onClick={() => setView('home')} className="cursor-pointer transition-opacity hover:opacity-80">
             <Logo text="StoryTelling" subtext="Premium Card Maker" />
           </div>
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400" id="nav-links">
+          <div className="hidden md:flex items-center gap-8 text-sm font-bold uppercase tracking-widest text-gray-500" id="nav-links">
+            <button 
+              onClick={() => {
+                setView('home');
+                setTimeout(() => document.getElementById('folder-concept')?.scrollIntoView({ behavior: 'smooth' }), 100);
+              }} 
+              className="hover:text-mint transition-colors flex items-center gap-2"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-mint" />
+              디자인 컨셉
+            </button>
+            <button 
+              onClick={() => {
+                setView('home');
+                setTimeout(() => document.getElementById('digital-auth')?.scrollIntoView({ behavior: 'smooth' }), 100);
+              }} 
+              className="hover:text-mint transition-colors flex items-center gap-2"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-mint" />
+              사이버 회사
+            </button>
+            <button 
+              onClick={() => {
+                setView('home');
+                setTimeout(() => document.getElementById('idea-submission')?.scrollIntoView({ behavior: 'smooth' }), 100);
+              }} 
+              className="hover:text-mint transition-colors flex items-center gap-2"
+            >
+              <Video className="w-3.5 h-3.5 text-mint" />
+              아이디어 제출
+            </button>
             <button 
               onClick={() => {
                 setView('home');
                 setTimeout(() => document.getElementById('showcase')?.scrollIntoView({ behavior: 'smooth' }), 100);
               }} 
-              className="hover:text-mint transition-colors"
-            >디자인 예시</button>
-            <button 
-              onClick={() => {
-                setView('home');
-                setTimeout(() => document.getElementById('email-preview')?.scrollIntoView({ behavior: 'smooth' }), 100);
-              }} 
-              className="hover:text-mint transition-colors"
-            >이메일 서명</button>
+              className="hover:text-mint transition-colors flex items-center gap-2"
+            >
+              <Layers className="w-3.5 h-3.5 text-mint" />
+              컬렉션
+            </button>
             <button 
               onClick={() => setView('brochure')}
-              className={`transition-colors flex items-center gap-1.5 ${view === 'brochure' ? 'text-mint font-bold' : 'hover:text-mint'}`}
+              className={`transition-colors flex items-center gap-2 ${view === 'brochure' ? 'text-mint font-bold' : 'hover:text-mint'}`}
             >
-              <Layout className="w-4 h-4" />
+              <FileText className="w-3.5 h-3.5" />
               브로셔 제작
             </button>
             <button 
@@ -62,8 +92,11 @@ export default function App() {
                 setView('home');
                 setTimeout(() => document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' }), 100);
               }} 
-              className="hover:text-mint transition-colors font-bold text-mint-bright"
-            >실물 명함 주문</button>
+              className="hover:text-mint transition-colors font-bold text-mint-bright flex items-center gap-2"
+            >
+              <CreditCard className="w-3.5 h-3.5" />
+              명함 주문
+            </button>
           </div>
           <button className="bg-white text-black px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-mint transition-all flex items-center gap-2 group" id="get-started-btn">
             문의하기
@@ -99,11 +132,11 @@ export default function App() {
                 </p>
                 <div className="flex flex-wrap gap-4" id="hero-actions">
                   <button 
-                    onClick={() => document.getElementById('showcase')?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() => document.getElementById('folder-concept')?.scrollIntoView({ behavior: 'smooth' })}
                     className="bg-mint text-dark-bg px-8 py-4 rounded-2xl text-lg font-bold hover:bg-mint-bright transition-all shadow-xl shadow-mint/10 flex items-center gap-2 group" 
                     id="primary-cta"
                   >
-                    디자인 예시 보기
+                    더 알아보기
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </button>
                   <button 
@@ -141,12 +174,24 @@ export default function App() {
             </div>
           </section>
 
+          {/* New Section: Folder Concept Animation */}
+          <FolderCardConcept />
+
+          {/* New Section: Cyber Access Card */}
+          <section className="bg-[#05080e] border-y border-white/5" id="digital-auth">
+            <div className="max-w-7xl mx-auto">
+              <DigitalAuthCard />
+            </div>
+          </section>
+          
+          <IdeaSubmission />
+
           {/* Showcase Section */}
           <section className="py-24 px-6 border-t border-white/5" id="showcase">
              <div className="max-w-7xl mx-auto">
                <div className="text-center mb-20">
                   <h2 className="text-5xl font-black tracking-tight mb-4">다채로운 테마 컬렉션</h2>
-                  <p className="text-gray-400 text-lg uppercase tracking-widest font-bold">StoryTelling의 디지털 여정</p>
+                  <p className="text-gray-400 text-lg uppercase tracking-widest font-bold">StoryTelling의 명함 디자인</p>
                 </div>
                
                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -171,9 +216,47 @@ export default function App() {
              </div>
           </section>
 
+          {/* Brochure Creator CTA Section */}
+          <section className="py-24 px-6 bg-dark-bg-secondary border-y border-white/5" id="digital-tools">
+            <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+               <div>
+                  <h2 className="text-4xl font-black mb-6 tracking-tighter">나만의 디지털 브로셔를 <br/> 직접 제작해보세요.</h2>
+                  <p className="text-gray-400 text-lg mb-8 leading-relaxed max-w-md">
+                    클릭 몇 번으로 완성되는 세련된 디지털 브로셔. 고객에게 명함을 건네는 것보다 더 강렬한 첫인상을 남길 수 있습니다.
+                  </p>
+                  <button 
+                    onClick={() => setView('brochure')}
+                    className="flex items-center gap-3 bg-white text-black px-8 py-4 rounded-2xl font-bold hover:bg-mint transition-all group"
+                  >
+                    제작 도구 열기
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </button>
+               </div>
+               <div className="relative group">
+                  <div className="absolute -inset-4 bg-mint/20 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <div className="relative bg-dark-bg border border-white/10 rounded-[2rem] p-8 overflow-hidden shadow-2xl">
+                     <div className="flex gap-2 mb-6">
+                        <div className="w-3 h-3 rounded-full bg-red-500/20" />
+                        <div className="w-3 h-3 rounded-full bg-yellow-500/20" />
+                        <div className="w-3 h-3 rounded-full bg-green-500/20" />
+                     </div>
+                     <div className="space-y-4">
+                        <div className="h-6 bg-white/5 rounded-lg w-1/3" />
+                        <div className="h-40 bg-white/5 rounded-2xl w-full flex items-center justify-center">
+                           <Layout className="w-12 h-12 text-mint/20" />
+                        </div>
+                        <div className="space-y-2">
+                           <div className="h-4 bg-white/5 rounded-lg w-full" />
+                           <div className="h-4 bg-white/5 rounded-lg w-5/6" />
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+          </section>
+
           {/* Order Section */}
-          <section className="py-32 px-6 bg-[#0c121e] relative overflow-hidden" id="order">
-             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-mint/30 to-transparent"></div>
+          <section className="py-32 px-6 relative overflow-hidden" id="order">
              <div className="max-w-7xl mx-auto">
                 <div className="grid lg:grid-cols-2 gap-20 items-center">
                    <div id="order-info">
@@ -184,7 +267,7 @@ export default function App() {
                       <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-tight">
                          명함 한 박스, <br />
                          <span className="text-transparent bg-clip-text bg-gradient-to-r from-mint via-mint-bright to-white">
-                           StoryTelling에서 완성하세요.
+                           실물로 완성하세요.
                          </span>
                       </h2>
                       <p className="text-xl text-gray-400 mb-10 leading-relaxed font-normal">
@@ -197,7 +280,7 @@ export default function App() {
                            '최고급 엑스트라 매트(Extra Matte) 400g~600g 중량지',
                            '하드보드지처럼 단단하고 묵직한 촉각적 경험',
                            '정교한 사각 재단 및 라운딩 처리 옵션',
-                           'MedIT 전용 투명 아크릴 명함 거치대 포함(선택)'
+                           '미니 폴더 패키지 및 브로셔 세트 구성 가능'
                          ].map((item, id) => (
                            <li key={id} className="flex items-center gap-3 text-gray-300 font-medium text-lg">
                               <div className="w-6 h-6 rounded-full bg-mint/10 flex items-center justify-center text-mint">
@@ -218,9 +301,6 @@ export default function App() {
                             <ChevronRight className="w-6 h-6" />
                          </button>
                       </div>
-                      <p className="text-[10px] text-gray-500 mt-6 text-center italic">
-                         * 본 사이트의 추천 링크를 통해 주문 시 소정의 수수료가 운영자에게 지급됩니다. (구매 가격은 동일합니다)
-                      </p>
                    </div>
 
                    <div className="relative" id="order-mockup">
@@ -253,7 +333,7 @@ export default function App() {
                                <div className="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/5 opacity-50">
                                   <div className="flex items-center gap-4">
                                      <Sparkles className="w-6 h-6 text-mint" />
-                                     <div className="font-bold">아크릴 디스플레이 케이스</div>
+                                     <div className="font-bold">패키지 폴더 브로셔 포함</div>
                                    </div>
                                    <div className="w-5 h-5 rounded-full border-2 border-white/20" />
                                </div>
@@ -265,93 +345,46 @@ export default function App() {
              </div>
           </section>
 
-          {/* Email Share Preview Section */}
-          <section className="py-24 px-6 bg-dark-bg-secondary" id="email-preview">
+          {/* Email Tools Section */}
+          <section className="py-24 px-6 bg-[#080b12]" id="email-preview">
             <div className="max-w-7xl mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">이메일 공유 미리보기</h2>
-                <p className="text-gray-400">사용자님의 이메일 하단에 명함이 삽입된 모습입니다.</p>
-              </div>
-              
-              <div className="max-w-3xl mx-auto bg-white rounded-3xl overflow-hidden shadow-2xl" id="gmail-mockup">
-                {/* Gmail Header */}
-                <div className="bg-[#f2f6fc] px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-                  <span className="text-sm font-semibold text-gray-700 font-sans">새 메시지</span>
-                  <div className="flex gap-2 text-gray-300">
-                    <div className="w-3 h-3 rounded-full bg-current opacity-20"></div>
-                    <div className="w-3 h-3 rounded-full bg-current opacity-20"></div>
-                    <div className="w-3 h-3 rounded-full bg-current opacity-20"></div>
-                  </div>
-                </div>
-                
-                {/* Gmail Content */}
-                <div className="p-10 text-gray-800 font-sans">
-                  <div className="border-b border-gray-100 pb-4 mb-6 text-sm text-gray-500">
-                    <div className="mb-2 uppercase font-bold text-[10px] tracking-widest text-mint">Digital Contact</div>
-                    <div className="text-xl font-bold text-gray-900 group">제 새로운 명함을 보내드립니다.</div>
-                  </div>
-                  
-                  <div className="space-y-4 mb-12 text-sm leading-relaxed">
-                    <p>안녕하세요,</p>
-                    <p>StoryTelling의 새로운 아이덴티티가 반영된 디지털 명함을 공유드립니다.</p>
-                    <p>앞으로의 협업과 연락은 이 명함을 통해 더욱 편리하게 가능합니다.</p>
-                    <p>감사합니다.</p>
-                  </div>
-
-                  {/* Embedded Component */}
-                  <div className="bg-gray-50 p-10 rounded-2xl border border-gray-100 flex justify-center shadow-inner">
-                    <div className="scale-90 md:scale-100 origin-center">
-                       <BusinessCard theme={activeTheme} />
+              <div className="grid lg:grid-cols-2 gap-20 items-center">
+                 <div className="order-2 lg:order-1">
+                    <div className="max-w-2xl mx-auto bg-white rounded-3xl overflow-hidden shadow-2xl" id="gmail-mockup">
+                      <div className="bg-[#f2f6fc] px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                        <span className="text-sm font-semibold text-gray-700 font-sans">새 메시지</span>
+                        <div className="flex gap-2">
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
+                        </div>
+                      </div>
+                      <div className="p-8 text-gray-800 font-sans">
+                        <div className="space-y-4 mb-8 text-sm leading-relaxed">
+                          <p>안녕하세요,</p>
+                          <p>제 새로운 디지털 명함을 명함과 함께 보내드립니다.</p>
+                        </div>
+                        <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex justify-center">
+                          <div className="scale-75 origin-center">
+                             <BusinessCard theme={activeTheme} />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="px-8 py-4 bg-white border-t border-gray-100">
+                        <div className="bg-[#0b57d0] text-white w-24 py-2 rounded-full text-xs font-bold text-center">보내기</div>
+                      </div>
                     </div>
-                  </div>
-                </div>
+                 </div>
 
-                {/* Gmail Footer */}
-                <div className="px-8 py-6 bg-white border-t border-gray-100 flex items-center gap-4">
-                  <button className="bg-[#0b57d0] text-white px-8 py-2.5 rounded-full text-sm font-bold shadow-md hover:bg-[#0842a0] transition-colors">보내기</button>
-                  <div className="flex gap-6 text-gray-400 ml-4">
-                    <Palette className="w-5 h-5" />
-                    <Type className="w-5 h-5" />
-                  </div>
-                </div>
+                 <div className="order-1 lg:order-2 space-y-8">
+                    <h2 className="text-4xl font-black tracking-tighter">디지털 시대의 <br/> 비즈니스 매너.</h2>
+                    <p className="text-xl text-gray-400 font-medium">
+                      이메일 서명 설정부터 디지털 명함 고유 링크까지. 오프라인과 온라인을 잇는 가장 스마트한 방법을 제공합니다.
+                    </p>
+                    <div className="pt-4">
+                       <EmailSignatureGuide />
+                    </div>
+                 </div>
               </div>
-            </div>
-          </section>
-
-          {/* Signature Guide Section */}
-          <section className="py-24 px-6 border-t border-white/5" id="how-to-use">
-            <div className="max-w-7xl mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">이메일 서명 설정하기</h2>
-                <p className="text-gray-400">복사하여 Gmail 설정에서 바로 사용할 수 있는 코드를 제공합니다.</p>
-              </div>
-              <EmailSignatureGuide />
-            </div>
-          </section>
-
-          {/* Event Section */}
-          <section className="py-32 px-6" id="event">
-            <div className="max-w-7xl mx-auto">
-              <motion.div 
-                whileHover={{ scale: 1.01 }}
-                className="bg-mint p-1 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] rounded-[3rem]"
-              >
-                <div className="bg-dark-bg p-12 md:p-20 rounded-[2.8rem] flex flex-col items-center text-center">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-mint/10 text-mint rounded-full text-sm font-bold tracking-widest uppercase mb-8 border border-mint/20">
-                    <span className="w-2 h-2 rounded-full bg-mint animate-pulse"></span>
-                    기간 한정 런칭 이벤트
-                  </div>
-                  <h2 className="text-4xl md:text-7xl font-extrabold tracking-tighter mb-8 max-w-4xl">
-                    당신만을 위한 브랜드 디자인, <br /> <span className="text-mint">100% 무료.</span>
-                  </h2>
-                  <p className="text-xl text-gray-400 max-w-2xl mb-12 font-medium">
-                    StoryTelling의 명함 솔루션과 함께하세요. 모든 사람을 위한 스마트한 비즈니스 커뮤니케이션을 제공합니다.
-                  </p>
-                  <button className="bg-mint text-dark-bg px-10 py-5 rounded-2xl text-xl font-black hover:bg-mint-bright hover:scale-105 transition-all shadow-2xl shadow-mint/20 uppercase tracking-tight">
-                    지금 신청하기
-                  </button>
-                </div>
-              </motion.div>
             </div>
           </section>
 
@@ -389,6 +422,29 @@ export default function App() {
               </div>
             </div>
           </section>
+
+          {/* Event Section */}
+          <section className="py-32 px-6" id="event">
+            <div className="max-w-7xl mx-auto">
+              <motion.div 
+                whileHover={{ scale: 1.01 }}
+                className="bg-mint p-1 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] rounded-[3rem]"
+              >
+                <div className="bg-dark-bg p-12 md:p-20 rounded-[2.8rem] flex flex-col items-center text-center">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-mint/10 text-mint rounded-full text-sm font-bold tracking-widest uppercase mb-8 border border-mint/20">
+                    <span className="w-2 h-2 rounded-full bg-mint animate-pulse"></span>
+                    기간 한정 런칭 이벤트
+                  </div>
+                  <h2 className="text-4xl md:text-7xl font-extrabold tracking-tighter mb-8 max-w-4xl">
+                    당신만을 위한 브랜드 디자인, <br /> <span className="text-mint">100% 무료.</span>
+                  </h2>
+                  <button className="bg-mint text-dark-bg px-10 py-5 rounded-2xl text-xl font-black hover:bg-mint-bright hover:scale-105 transition-all shadow-2xl shadow-mint/20 uppercase tracking-tight">
+                    지금 신청하기
+                  </button>
+                </div>
+              </motion.div>
+            </div>
+          </section>
         </>
       ) : (
         <BrochureCreator onBack={() => setView('home')} />
@@ -410,5 +466,6 @@ export default function App() {
     </div>
   );
 }
+
 
 

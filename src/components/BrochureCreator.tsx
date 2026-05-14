@@ -10,6 +10,7 @@ interface BrochureData {
   website: string;
   features: string[];
   color: string;
+  foldingType: string;
 }
 
 export default function BrochureCreator({ onBack }: { onBack: () => void }) {
@@ -20,8 +21,15 @@ export default function BrochureCreator({ onBack }: { onBack: () => void }) {
     contactEmail: "contact@example.com",
     website: "www.example.com",
     features: ["Innovative Design", "Seamless Integration", "Scalable Performance"],
-    color: "#00d2b4"
+    color: "#00d2b4",
+    foldingType: "gate"
   });
+
+  const foldingTypes = [
+    { id: 'gate', name: '4단 병풍 접지 (Gate-fold)', description: '양쪽에서 안으로 접히는 대문형 접지' },
+    { id: 'z', name: '3단 Z 접지 (Z-fold)', description: 'Z자 형태로 접히는 효율적인 접지' },
+    { id: 'parallel', name: '2단 평행 접지', description: '심플하고 정갈한 반으로 접는 접지' },
+  ];
 
   const [previewMode, setPreviewMode] = useState<boolean>(false);
 
@@ -171,6 +179,25 @@ export default function BrochureCreator({ onBack }: { onBack: () => void }) {
 
               <div>
                 <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-white">
+                  <Layout className="w-5 h-5 text-mint" />
+                  접지 방식 (Folding Type)
+                </h3>
+                <div className="grid gap-3">
+                   {foldingTypes.map(type => (
+                     <button
+                       key={type.id}
+                       onClick={() => setData(prev => ({ ...prev, foldingType: type.id }))}
+                       className={`flex flex-col p-4 rounded-2xl border text-left transition-all ${data.foldingType === type.id ? 'bg-mint/10 border-mint' : 'bg-dark-bg border-white/10 hover:border-white/20'}`}
+                     >
+                        <span className={`font-bold text-sm ${data.foldingType === type.id ? 'text-mint' : 'text-white'}`}>{type.name}</span>
+                        <span className="text-[10px] text-gray-500 mt-1">{type.description}</span>
+                     </button>
+                   ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-white">
                   <Palette className="w-5 h-5 text-mint" />
                   테마 색상
                 </h3>
@@ -246,6 +273,26 @@ export default function BrochureCreator({ onBack }: { onBack: () => void }) {
              <div className="relative group">
                 <div className="absolute -inset-4 bg-mint/20 blur-[100px] -z-10 opacity-0 group-hover:opacity-50 transition-opacity"></div>
                 <div className="bg-white rounded-[2.5rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] overflow-hidden aspect-[3/4] text-dark-bg relative" id="brochure-preview">
+                   {/* Fold Lines Overlay */}
+                   <div className="absolute inset-0 pointer-events-none z-30 flex">
+                      {data.foldingType === 'gate' && (
+                        <>
+                          <div className="w-1/4 h-full border-r border-dashed border-gray-200" />
+                          <div className="w-1/4 h-full border-r border-dashed border-gray-200" />
+                          <div className="w-1/4 h-full border-r border-dashed border-gray-200" />
+                        </>
+                      )}
+                      {data.foldingType === 'z' && (
+                        <>
+                          <div className="w-1/3 h-full border-r border-dashed border-gray-200" />
+                          <div className="w-1/3 h-full border-r border-dashed border-gray-200" />
+                        </>
+                      )}
+                      {data.foldingType === 'parallel' && (
+                        <div className="w-1/2 h-full border-r border-dashed border-gray-200" />
+                      )}
+                   </div>
+
                    {/* Brochure Header */}
                    <div style={{ backgroundColor: data.color }} className="h-48 flex items-end p-8">
                       <div className="w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center mb-4">

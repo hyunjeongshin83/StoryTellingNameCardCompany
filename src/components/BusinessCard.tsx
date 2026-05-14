@@ -4,7 +4,7 @@
  */
 
 import { motion } from 'motion/react';
-import { Mail, Phone, Globe, MapPin } from 'lucide-react';
+import { Phone, Mail, Globe, MapPin } from 'lucide-react';
 import Logo from './Logo';
 import { BusinessCardProps } from '../types';
 
@@ -85,25 +85,25 @@ export default function BusinessCard({ theme = 'classic' }: BusinessCardProps) {
         </div>
 
         {/* Footer: Contact info (Cleanly aligned, Dotum font) */}
-        <div className={`flex flex-col items-center gap-1.5 text-[8.5px] font-dotum mt-4 ${styles.subtext}`} id="card-footer">
+        <div className={`flex flex-col items-center gap-2 text-[8.5px] font-dotum mt-4 ${styles.subtext}`} id="card-footer">
           <div className="flex items-center justify-center gap-2">
-            <img src={`https://img.icons8.com/?size=40&id=9730&format=png&color=${iconColor}`} alt="Phone" className="w-2.5 h-2.5 object-contain" />
+            <Phone className={`w-3 h-3 ${styles.icon}`} />
             <span className={`tracking-widest ${contentColor}`}>+82 10 8497 9634</span>
           </div>
           <div className="flex items-center justify-center gap-2">
-            <img src={`https://img.icons8.com/?size=40&id=12580&format=png&color=${iconColor}`} alt="Mail" className="w-2.5 h-2.5 object-contain" />
+            <Mail className={`w-3 h-3 ${styles.icon}`} />
             <span className={contentColor}>hyunjeong.shin@sookmyung.ac.kr</span>
           </div>
           <div className="flex items-center justify-center gap-2">
-            <img src={`https://img.icons8.com/?size=40&id=13665&format=png&color=${iconColor}`} alt="Web" className="w-2.5 h-2.5 object-contain" />
+            <Globe className={`w-3 h-3 ${styles.icon}`} />
             <span className={`truncate max-w-[240px] ${contentColor}`}>https://hyunjeongshin83.github.io/medit-homepage</span>
           </div>
-          <div className="flex flex-col items-center mt-2 text-center leading-tight">
-            <div className="flex items-center gap-1 justify-center">
-              <img src={`https://img.icons8.com/?size=40&id=13800&format=png&color=${iconColor}`} alt="Pin" className="w-2.5 h-2.5 object-contain flex-shrink-0" />
+          <div className="flex flex-col items-center mt-1 text-center leading-tight">
+            <div className="flex items-center gap-1.5 justify-center">
+              <MapPin className={`w-3 h-3 flex-shrink-0 ${styles.icon}`} />
               <span className={contentColor}>숙명여자대학교 창업보육센터 202호</span>
             </div>
-            <span className={`pl-3.5 ${contentColor}`}>서울시 용산구 청파로47길 1</span>
+            <span className={`pl-4 ${contentColor}`}>서울시 용산구 청파로47길 1</span>
           </div>
         </div>
       </div>
